@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 interface WorkoutPlanDao {
 
     @Query("SELECT * FROM workout_plan WHERE id = :id")
-    suspend fun getWorkoutPlan(id: Int): WorkoutPlan
+    suspend fun getWorkoutPlanById(id: Int): WorkoutPlan
 
     @Query("SELECT * FROM workout_plan")
-    suspend fun getAllWorkoutPlans(): Flow<List<WorkoutPlan>>
+    fun getAllWorkoutPlans(): Flow<List<WorkoutPlan>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(workoutPlan: WorkoutPlan)
