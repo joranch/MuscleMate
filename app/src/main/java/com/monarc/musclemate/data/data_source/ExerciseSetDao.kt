@@ -2,14 +2,13 @@ package com.monarc.musclemate.data.data_source
 
 import androidx.room.*
 import com.monarc.musclemate.data.entities.ExerciseSet
-import com.monarc.musclemate.data.entities.WorkoutExercise
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ExerciseSetDao {
 
     @Query("SELECT * FROM exercise_set WHERE completed_exercise_id = :completedExerciseId")
-    suspend fun getSetsForExercise(completedExerciseId: Int): List<ExerciseSet>
+    fun getSetsForExercise(completedExerciseId: Int): Flow<List<ExerciseSet>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(exerciseSet: ExerciseSet)

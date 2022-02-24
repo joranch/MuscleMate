@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface ExerciseDao {
 
     @Query("SELECT * FROM exercise")
-    suspend fun getAllExercises(): Flow<List<Exercise>>
+    fun getAllExercises(): Flow<List<Exercise>>
 
     @Query("SELECT * FROM exercise WHERE id = :exerciseId")
     suspend fun getExercise(exerciseId: Int): Exercise

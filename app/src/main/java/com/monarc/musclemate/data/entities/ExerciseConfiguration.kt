@@ -7,10 +7,10 @@ import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
 /**
- * WorkoutExercise is a class that configures sets and reps for a single Exercise
+ * ExerciseConfiguration is a class that configures sets and reps for a single Exercise
  */
-@Entity(tableName = "workout_exercise")
-data class WorkoutExercise(
+@Entity(tableName = "exercise_configuration")
+data class ExerciseConfiguration(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     @ColumnInfo(name = "workout_plan_id")

@@ -6,16 +6,17 @@ import com.monarc.musclemate.data.entities.*
 
 @Database(
     entities = [WorkoutPlan::class,
-        WorkoutExercise::class,
+        ExerciseConfiguration::class,
         Exercise::class,
         ExerciseSet::class,
         CompletedExercise::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class MuscleMateDatabase : RoomDatabase() {
 
     abstract val workoutPlanDao: WorkoutPlanDao
-    abstract val workoutExerciseDao: WorkoutExerciseDao
+    abstract val exerciseConfigurationDao: ExerciseConfigurationDao
     abstract val exerciseSetDao: ExerciseSetDao
     abstract val exerciseDao: ExerciseDao
     abstract val completedExerciseDao: CompletedExerciseDao

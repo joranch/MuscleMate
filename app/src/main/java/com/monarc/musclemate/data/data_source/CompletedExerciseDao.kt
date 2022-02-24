@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface CompletedExerciseDao {
 
     @Query("SELECT * FROM completed_exercise WHERE exercise_id = :exerciseId order by date DESC")
-    suspend fun getCompletedExercisesOfExercise(exerciseId: Int): Flow<List<CompletedExercise>>
+    fun getCompletedExercisesOfExercise(exerciseId: Int): Flow<List<CompletedExercise>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(completedExercise: CompletedExercise)
