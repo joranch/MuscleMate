@@ -2,8 +2,13 @@ package com.monarc.musclemate.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
+/**
+ * WorkoutExercise is a class that configures sets and reps for a single Exercise
+ */
 @Entity(tableName = "workout_exercise")
 data class WorkoutExercise(
     @PrimaryKey(autoGenerate = true)
