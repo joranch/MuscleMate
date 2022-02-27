@@ -1,13 +1,30 @@
 package com.monarc.musclemate.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.monarc.musclemate.data.data_source.MuscleMateDatabase
+import com.monarc.musclemate.data.data_source.WorkoutPlanDao
+import com.monarc.musclemate.data.entities.WorkoutPlan
+import com.monarc.musclemate.ui.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val muscleMateDatabase: MuscleMateDatabase
+) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val _workoutPlans = MutableStateFlow<ArrayList<WorkoutPlan>>(ArrayList())
+    val workoutPlans = _workoutPlans.asStateFlow()
+
+    fun addNewWorkoutPlan() {
+        viewModelScope.launch {
+            val x = muscleMateDatabase.workoutPlanDao.getAllWorkoutPlans().asLiveData()
+
+        }
+        _workoutPlans.value.add(WorkoutPlan(1, "Upper body", "Upper body day",null))
     }
-    val text: LiveData<String> = _text
+
 }

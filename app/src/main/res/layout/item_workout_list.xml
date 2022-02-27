@@ -27,6 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_workout_placeholder" />
 
             <TextView
@@ -61,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/layout_margin_small"
                 android:gravity="center"
-                android:text="Jan. 1"
+                android:text="@{workout.lastWorkoutDate.toString()}"
                 android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

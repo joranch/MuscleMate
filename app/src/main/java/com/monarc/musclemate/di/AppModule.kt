@@ -13,9 +13,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+
     @Provides
     @Singleton
-    fun provideNoteDatabase(app: Application): MuscleMateDatabase {
+    fun provideMuscleMateDatabase(app: Application): MuscleMateDatabase {
         return Room.databaseBuilder(
             app,
             MuscleMateDatabase::class.java,
