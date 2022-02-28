@@ -1,9 +1,9 @@
 package com.monarc.musclemate.ui.home
 
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.*
-import com.monarc.musclemate.data.data_source.MuscleMateDatabase
-import com.monarc.musclemate.data.data_source.WorkoutPlanDao
 import com.monarc.musclemate.data.entities.WorkoutPlan
+import com.monarc.musclemate.domain.repositories.WorkoutPlanRepository
 import com.monarc.musclemate.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,18 +13,28 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val muscleMateDatabase: MuscleMateDatabase
+    private val workoutPlanRepository: WorkoutPlanRepository
 ) : BaseViewModel() {
 
-    private val _workoutPlans = MutableStateFlow<ArrayList<WorkoutPlan>>(ArrayList())
-    val workoutPlans = _workoutPlans.asStateFlow()
+    private val _workoutPlans = workoutPlanRepository.getWorkoutPlans().asLiveData()
+    val workoutPlans = _workoutPlans
 
     fun addNewWorkoutPlan() {
         viewModelScope.launch {
-            val x = muscleMateDatabase.workoutPlanDao.getAllWorkoutPlans().asLiveData()
-
+            workoutPlanRepository.insertWorkoutPlan(
+                WorkoutPlan(
+                    title = "Upper body",
+                    description = "Upper body day",
+                    lastWorkoutDate = null
+                )
+            )
         }
-        _workoutPlans.value.add(WorkoutPlan(1, "Upper body", "Upper body day",null))
+    }
+
+    fun deleteWorkoutPlan(workoutPlan: WorkoutPlan) {
+        viewModelScope.launch {
+            workoutPlanRepository.deleteWorkoutPlan(workoutPlan)
+        }
     }
 
 }

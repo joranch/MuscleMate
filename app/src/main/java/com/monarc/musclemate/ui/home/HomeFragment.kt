@@ -41,26 +41,27 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         workoutListAdapter = WorkoutListAdapter { workoutPlan -> onWorkoutPlanItemClick(workoutPlan) }
-        val layoutManager = GridLayoutManager(context, 4)
+        val layoutManager = GridLayoutManager(requireContext(), 3)
         binding.workoutRecyclerView.layoutManager = layoutManager
         binding.workoutRecyclerView.adapter = workoutListAdapter
 
         subscribeToObservables()
+
         binding.fab.setOnClickListener{
             homeViewModel.addNewWorkoutPlan()
         }
     }
 
     private fun subscribeToObservables() {
-        lifecycleScope.launchWhenStarted {
-            homeViewModel.workoutPlans.collectLatest {
-                workoutListAdapter.submitList(it)
+            homeViewModel.workoutPlans.observe(viewLifecycleOwner) {
+                it.let {
+                    workoutListAdapter.submitList(it.toList())
+                }
             }
-        }
     }
 
     private fun onWorkoutPlanItemClick(workoutPlan: WorkoutPlan) {
-        //TODO: navigate to workout details
+        homeViewModel.deleteWorkoutPlan(workoutPlan)
     }
 
     override fun onDestroyView() {
