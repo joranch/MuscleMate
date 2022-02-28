@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.monarc.musclemate.ui.home.adapters.WorkoutListAdapter
 import com.monarc.musclemate.data.entities.WorkoutPlan
 import com.monarc.musclemate.databinding.FragmentHomeBinding
+import com.monarc.musclemate.ui.home.adapters.WorkoutListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -53,11 +53,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun subscribeToObservables() {
-            homeViewModel.workoutPlans.observe(viewLifecycleOwner) {
+        lifecycleScope.launchWhenStarted {
+            homeViewModel.workoutPlans.collectLatest {
                 it.let {
                     workoutListAdapter.submitList(it.toList())
                 }
             }
+        }
+
+
+//            homeViewModel.workoutPlans.observe(viewLifecycleOwner) {
+//                it.let {
+//                    workoutListAdapter.submitList(it.toList())
+//                }
+//            }
     }
 
     private fun onWorkoutPlanItemClick(workoutPlan: WorkoutPlan) {
