@@ -1,112 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/exercise_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:elevation="10dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_workout_placeholder" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="@dimen/layout_margin"
-        android:layout_marginEnd="@dimen/layout_margin"
-        android:layout_marginBottom="@dimen/layout_margin"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/exercise_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:elevation="10dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_workout_placeholder" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="100dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="@dimen/layout_margin"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:layout_marginBottom="@dimen/layout_margin"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/expand_image"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="26dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="26dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_arrow_down" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/exercise_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="@dimen/layout_margin_small"
-                android:text=""
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                app:layout_constraintEnd_toStartOf="@+id/expand_image"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Bench press" />
+                <TextView
+                    android:id="@+id/exercise_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="@dimen/layout_margin_small"
+                    android:layout_marginEnd="8dp"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Bench press" />
 
-            <TextView
-                android:id="@+id/sets_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_small"
-                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@+id/exercise_name"
-                app:layout_constraintTop_toBottomOf="@+id/exercise_name"
-                tools:text="Sets: 3" />
+                <TextView
+                    android:id="@+id/sets_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_margin_small"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@+id/exercise_name"
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_name"
+                    tools:text="Sets: 3" />
 
-            <ImageView
-                android:id="@+id/rest_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="32dp"
-                app:layout_constraintBottom_toBottomOf="@+id/sets_text"
-                app:layout_constraintStart_toEndOf="@+id/sets_text"
-                app:layout_constraintTop_toTopOf="@+id/sets_text"
-                app:srcCompat="@drawable/ic_timer" />
+                <ImageView
+                    android:id="@+id/rest_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/sets_text"
+                    app:layout_constraintStart_toEndOf="@+id/sets_text"
+                    app:layout_constraintTop_toTopOf="@+id/sets_text"
+                    app:srcCompat="@drawable/ic_timer" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/rest_icon"
-                app:layout_constraintStart_toEndOf="@+id/rest_icon"
-                app:layout_constraintTop_toTopOf="@+id/rest_icon"
-                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                android:textSize="15sp"
-                tools:text="120" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/rest_icon"
+                    app:layout_constraintStart_toEndOf="@+id/rest_icon"
+                    app:layout_constraintTop_toTopOf="@+id/rest_icon"
+                    tools:text="120" />
 
-            <TextView
-                android:id="@+id/target_muscle_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_small"
-                app:layout_constraintStart_toStartOf="@+id/sets_text"
-                app:layout_constraintTop_toBottomOf="@+id/sets_text"
-                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                android:background="?attr/colorSecondary"
-                android:textColor="?attr/colorOnSecondary"
-                android:padding="4dp"
-                android:alpha="0.4"
-                tools:text="Chest" />
+                <TextView
+                    android:id="@+id/target_muscle_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_margin_small"
+                    android:layout_marginBottom="@dimen/layout_margin_small"
+                    android:alpha="0.4"
+                    android:background="?attr/colorSecondary"
+                    android:padding="4dp"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                    android:textColor="?attr/colorOnSecondary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/sets_text"
+                    app:layout_constraintTop_toBottomOf="@+id/sets_text"
+                    tools:text="Chest" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

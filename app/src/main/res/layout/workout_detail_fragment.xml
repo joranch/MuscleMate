@@ -2,15 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.workout.WorkoutDetailFragment">
+    
+    <data>
+        <variable
+            name="viewModel"
+            type="com.monarc.musclemate.ui.workout.WorkoutDetailViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/backgroundColor">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageView"
@@ -20,7 +23,7 @@
             android:contentDescription="@string/set_image_for_workout"
             android:elevation="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_workout_placeholder"
+            app:srcCompat="@drawable/ic_workout_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,25 +58,25 @@
                 android:selectAllOnFocus="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/description_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/layout_margin"
-            android:layout_marginTop="@dimen/layout_margin"
-            android:layout_marginEnd="@dimen/layout_margin"
-            android:hint="@string/enter_a_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_input_layout">
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/description_input_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/layout_margin"-->
+<!--            android:layout_marginTop="@dimen/layout_margin"-->
+<!--            android:layout_marginEnd="@dimen/layout_margin"-->
+<!--            android:hint="@string/enter_a_description"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/title_input_layout">-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/description_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="3"
-                android:singleLine="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/description_text"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:maxLines="3"-->
+<!--                android:singleLine="false" />-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -84,7 +87,7 @@
             app:cardElevation="-5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description_input_layout">
+            app:layout_constraintTop_toBottomOf="@id/title_input_layout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -103,17 +106,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/layout_margin_small"
-                    app:layout_constraintTop_toBottomOf="@+id/exercises_label" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/exercises_recyclerview"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/exercises_label"-->
+<!--                    tools:listitem="@layout/item_workout_exercises_list"/>-->
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
         <Button
-            android:id="@+id/add_exercise"
+            android:id="@+id/add_exercise_button"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_gravity="bottom|end"
@@ -125,8 +129,6 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_exercise_fab"
-            android:backgroundTint="?attr/colorPrimary"
-            android:tint="@attr/colorOnPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

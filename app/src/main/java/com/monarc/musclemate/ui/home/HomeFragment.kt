@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.monarc.musclemate.data.entities.WorkoutPlan
 import com.monarc.musclemate.databinding.FragmentHomeBinding
@@ -70,7 +71,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun onWorkoutPlanItemClick(workoutPlan: WorkoutPlan) {
-        homeViewModel.deleteWorkoutPlan(workoutPlan)
+//        homeViewModel.deleteWorkoutPlan(workoutPlan)
+        findNavController().navigate(HomeFragmentDirections.actionNavHomeToWorkoutDetailFragment())
     }
 
     override fun onDestroyView() {

@@ -2,13 +2,22 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/homeFragment">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/homeFragment"
         android:name="com.monarc.musclemate.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Muscle Mate"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_workoutDetailFragment"
+            app:destination="@id/workoutDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutDetailFragment"
+        android:name="com.monarc.musclemate.ui.workout.WorkoutDetailFragment"
+        android:label="Workout routine"
+        tools:layout="@layout/workout_detail_fragment" />
 
 </navigation>

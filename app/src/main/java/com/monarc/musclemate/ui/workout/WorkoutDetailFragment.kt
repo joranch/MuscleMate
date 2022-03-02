@@ -1,32 +1,48 @@
 package com.monarc.musclemate.ui.workout
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.monarc.musclemate.R
+import android.widget.ListAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.monarc.musclemate.databinding.WorkoutDetailFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WorkoutDetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = WorkoutDetailFragment()
-    }
+    private val viewModel: WorkoutDetailViewModel by viewModels()
 
-    private lateinit var viewModel: WorkoutDetailViewModel
+    private var _binding: WorkoutDetailFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.workout_detail_fragment, container, false)
+
+        _binding = WorkoutDetailFragmentBinding.inflate(inflater, container, false)
+
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(WorkoutDetailViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+
+        binding.addExerciseButton.setOnClickListener {
+            viewModel.getExercises()
+        }
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }
