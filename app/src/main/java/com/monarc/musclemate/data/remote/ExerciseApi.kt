@@ -26,6 +26,18 @@ interface ExerciseApi {
     @GET("exercise/")
     suspend fun getExercises(
         @Query("language") language: Int,
-    @Query("limit") limit: Int = 100
-    ) : Response<ExerciseResponse> // TODO proper response
+    @Query("limit") limit: Int = 500
+    ) : Response<ExerciseResponse>
+
+    @GET("exercise/")
+    suspend fun getExerciseForId(
+        @Query("language") language: Int,
+        @Query("id") id: Int
+    ) : Response<ExerciseResponse>
+
+    @GET("exercisebaseinfo/")
+    suspend fun getBaseExercises(
+        @Query("language") language: Int,
+        @Query("limit") limit: Int = 500
+    ) : Response<BaseExerciseResponse>
 }

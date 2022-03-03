@@ -25,7 +25,6 @@ class ExerciseApiRepositoryImpl @Inject constructor(
             }
         } catch (e: Exception) {
             Resource(Status.ERROR, null, e.localizedMessage ?: "An error occured")
-
         }
     }
 }

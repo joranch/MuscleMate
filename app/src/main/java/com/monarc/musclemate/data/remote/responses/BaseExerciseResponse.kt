@@ -1,12 +1,13 @@
 package com.monarc.musclemate.data.remote.responses
 
+import com.monarc.musclemate.data.remote.dto.BaseExerciseDto
 import com.monarc.musclemate.data.remote.dto.ExerciseDto
 
-open class ExerciseResponse(
+class BaseExerciseResponse(
+
     val count: Int = 0,
     val next: String?,
     val previous: String?,
-    val results: List<ExerciseDto> = emptyList()
+    val results: List<BaseExerciseDto> = emptyList()
 ) {
-
 }
