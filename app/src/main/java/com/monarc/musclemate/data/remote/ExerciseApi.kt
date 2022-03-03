@@ -1,6 +1,8 @@
 package com.monarc.musclemate.data.remote
 
 import com.monarc.musclemate.data.enums.ApiConstants
+import com.monarc.musclemate.data.remote.dto.ExerciseDto
+import com.monarc.musclemate.data.remote.responses.ExerciseResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Response
@@ -25,5 +27,5 @@ interface ExerciseApi {
     suspend fun getExercises(
         @Query("language") language: Int,
     @Query("limit") limit: Int = 100
-    ) : Response<String> // TODO proper response
+    ) : Response<ExerciseResponse> // TODO proper response
 }
