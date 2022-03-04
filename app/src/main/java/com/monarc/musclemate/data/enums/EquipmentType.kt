@@ -10,5 +10,6 @@ enum class EquipmentType(val id: Int, val description: String) {
     Bodyweight(7, "Bodyweight exercise"),
     Bench(8, "Bench"),
     InclineBench(1, "Incline bench"),
-    Kettlebell(10, "Kettlebell"),
+    Kettlebell(10, "Kettlebell")
+
 }
