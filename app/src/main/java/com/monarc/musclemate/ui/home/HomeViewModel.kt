@@ -1,13 +1,11 @@
 package com.monarc.musclemate.ui.home
 
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.*
-import com.monarc.musclemate.data.entities.WorkoutPlan
-import com.monarc.musclemate.domain.repositories.WorkoutPlanRepository
+import com.monarc.musclemate.data.entities.WorkoutRoutine
+import com.monarc.musclemate.domain.repositories.WorkoutRoutineRepository
 import com.monarc.musclemate.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -15,24 +13,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val workoutPlanRepository: WorkoutPlanRepository
+    private val workoutRoutineRepository: WorkoutRoutineRepository
 ) : BaseViewModel() {
 
-    private val _workoutPlans = MutableStateFlow(emptyList<WorkoutPlan>()) //workoutPlanRepository.getWorkoutPlans().asLiveData()
-    val workoutPlans = _workoutPlans.asStateFlow()
+    private val _workoutRoutines = MutableStateFlow(emptyList<WorkoutRoutine>()) //workoutRoutineRepository.getWorkoutPlans().asLiveData()
+    val workoutRoutines = _workoutRoutines.asStateFlow()
 
     init {
         viewModelScope.launch {
-            workoutPlanRepository.getWorkoutPlans().collect { items ->
-                _workoutPlans.value = items
+            workoutRoutineRepository.getWorkoutPlans().collect { items ->
+                _workoutRoutines.value = items
             }
         }
     }
 
     fun addNewWorkoutPlan() {
         viewModelScope.launch {
-            workoutPlanRepository.insertWorkoutPlan(
-                WorkoutPlan(
+            workoutRoutineRepository.insertWorkoutPlan(
+                WorkoutRoutine(
                     title = "Upper body",
                     description = "Upper body day",
                     lastWorkoutDate = null
@@ -41,9 +39,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun deleteWorkoutPlan(workoutPlan: WorkoutPlan) {
+    fun deleteWorkoutPlan(workoutRoutine: WorkoutRoutine) {
         viewModelScope.launch {
-            workoutPlanRepository.deleteWorkoutPlan(workoutPlan)
+            workoutRoutineRepository.deleteWorkoutPlan(workoutRoutine)
         }
     }
 

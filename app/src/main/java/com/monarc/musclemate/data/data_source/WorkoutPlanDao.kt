@@ -1,24 +1,24 @@
 package com.monarc.musclemate.data.data_source
 
 import androidx.room.*
-import com.monarc.musclemate.data.entities.WorkoutPlan
+import com.monarc.musclemate.data.entities.WorkoutRoutine
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WorkoutPlanDao {
 
-    @Query("SELECT * FROM workout_plan WHERE id = :id")
-    suspend fun getWorkoutPlanById(id: Int): WorkoutPlan
+    @Query("SELECT * FROM workout_routine WHERE id = :id")
+    suspend fun getWorkoutPlanById(id: Int): WorkoutRoutine
 
-    @Query("SELECT * FROM workout_plan")
-    fun getAllWorkoutPlans(): Flow<List<WorkoutPlan>>
+    @Query("SELECT * FROM workout_routine")
+    fun getAllWorkoutPlans(): Flow<List<WorkoutRoutine>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(workoutPlan: WorkoutPlan)
+    suspend fun insert(workoutRoutine: WorkoutRoutine)
 
     @Update
-    suspend fun update(workoutPlan: WorkoutPlan)
+    suspend fun update(workoutRoutine: WorkoutRoutine)
 
     @Delete
-    suspend fun delete(workoutPlan: WorkoutPlan)
+    suspend fun delete(workoutRoutine: WorkoutRoutine)
 }

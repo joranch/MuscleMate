@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.monarc.musclemate.data.entities.*
 
 @Database(
-    entities = [WorkoutPlan::class,
+    entities = [WorkoutRoutine::class,
         ExerciseConfiguration::class,
         Exercise::class,
         ExerciseSet::class,

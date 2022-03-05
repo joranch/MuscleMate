@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.monarc.musclemate.data.entities.WorkoutPlan
+import com.monarc.musclemate.data.entities.WorkoutRoutine
 import com.monarc.musclemate.databinding.FragmentHomeBinding
 import com.monarc.musclemate.ui.home.adapters.WorkoutListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,30 +49,23 @@ class HomeFragment : Fragment() {
         subscribeToObservables()
 
         binding.fab.setOnClickListener{
-            homeViewModel.addNewWorkoutPlan()
+            findNavController().navigate(HomeFragmentDirections.actionNavHomeToWorkoutDetailFragment(WorkoutRoutine.NEW_WORKOUT_ROUTINE_ID))
         }
     }
 
     private fun subscribeToObservables() {
         lifecycleScope.launchWhenStarted {
-            homeViewModel.workoutPlans.collectLatest {
+            homeViewModel.workoutRoutines.collectLatest {
                 it.let {
                     workoutListAdapter.submitList(it.toList())
                 }
             }
         }
-
-
-//            homeViewModel.workoutPlans.observe(viewLifecycleOwner) {
-//                it.let {
-//                    workoutListAdapter.submitList(it.toList())
-//                }
-//            }
     }
 
-    private fun onWorkoutPlanItemClick(workoutPlan: WorkoutPlan) {
-//        homeViewModel.deleteWorkoutPlan(workoutPlan)
-        findNavController().navigate(HomeFragmentDirections.actionNavHomeToWorkoutDetailFragment())
+    private fun onWorkoutPlanItemClick(workoutRoutine: WorkoutRoutine) {
+//        homeViewModel.deleteWorkoutPlan(workoutRoutine)
+        findNavController().navigate(HomeFragmentDirections.actionNavHomeToWorkoutDetailFragment(workoutRoutine.id))
     }
 
     override fun onDestroyView() {

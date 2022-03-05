@@ -6,7 +6,7 @@
     <data>
         <variable
             name="workout"
-            type="com.monarc.musclemate.data.entities.WorkoutPlan" />
+            type="com.monarc.musclemate.data.entities.WorkoutRoutine" />
     </data>
 
     <androidx.cardview.widget.CardView

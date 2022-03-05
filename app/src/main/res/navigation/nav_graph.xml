@@ -12,12 +12,20 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_workoutDetailFragment"
-            app:destination="@id/workoutDetailFragment" />
+            app:destination="@id/workoutDetailFragment">
+            <argument
+                android:name="workoutId"
+                app:argType="integer" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/workoutDetailFragment"
         android:name="com.monarc.musclemate.ui.workout.WorkoutDetailFragment"
         android:label="Workout routine"
-        tools:layout="@layout/workout_detail_fragment" />
+        tools:layout="@layout/workout_detail_fragment" >
+        <argument
+            android:name="workoutId"
+            app:argType="integer"/>
+    </fragment>
 
 </navigation>

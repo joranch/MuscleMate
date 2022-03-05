@@ -6,12 +6,11 @@ import com.monarc.musclemate.data.data_source.MuscleMateDatabase
 import com.monarc.musclemate.data.enums.ApiConstants
 import com.monarc.musclemate.data.remote.ExerciseApi
 import com.monarc.musclemate.data.repositories.ExerciseApiRepositoryImpl
-import com.monarc.musclemate.data.repositories.WorkoutPlanRepositoryImpl
+import com.monarc.musclemate.data.repositories.WorkoutRoutineRepositoryImpl
 import com.monarc.musclemate.domain.repositories.ExerciseApiRepository
-import com.monarc.musclemate.domain.repositories.WorkoutPlanRepository
+import com.monarc.musclemate.domain.repositories.WorkoutRoutineRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,8 +23,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-
     @Provides
     @Singleton
     fun provideMuscleMateDatabase(app: Application): MuscleMateDatabase {
@@ -54,12 +51,16 @@ object AppModule {
     @Provides
     fun provideExerciseApiRepository(api: ExerciseApi): ExerciseApiRepository = ExerciseApiRepositoryImpl(api)
 
-    @Module
-    @InstallIn(SingletonComponent::class)
-    internal abstract class DependenciesBindings {
-        @Singleton
-        @Binds
-        abstract fun bindWorkoutPlanRepository(
-            workoutPlanRepositoryImpl: WorkoutPlanRepositoryImpl): WorkoutPlanRepository
-    }
+    @Singleton
+    @Provides
+    fun provideWorkoutRepository(db: MuscleMateDatabase): WorkoutRoutineRepository = WorkoutRoutineRepositoryImpl(db)
+
+//    @Module
+//    @InstallIn(SingletonComponent::class)
+//    internal abstract class DependenciesBindings {
+//        @Singleton
+//        @Binds
+//        abstract fun bindWorkoutPlanRepository(
+//            workoutPlanRepositoryImpl: WorkoutRoutineRepositoryImpl): WorkoutRoutineRepository
+//    }
 }

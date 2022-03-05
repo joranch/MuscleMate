@@ -55,7 +55,8 @@
                 android:id="@+id/title_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"
+                android:text="@{viewModel.workoutRoutine.title}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 <!--        <com.google.android.material.textfield.TextInputLayout-->

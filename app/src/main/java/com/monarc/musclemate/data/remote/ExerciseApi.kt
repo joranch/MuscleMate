@@ -29,17 +29,17 @@ interface ExerciseApi {
     @GET("exercise/")
     suspend fun getExercises(
         @Query("language") language: Int,
-    @Query("limit") limit: Int = 500
-    ) : Response<ExerciseApiResponse<ExerciseDto>>
+        @Query("limit") limit: Int = 500
+    ): Response<ExerciseApiResponse<ExerciseDto>>
 
     @GET("exerciseinfo/{id}")
     suspend fun getExerciseInfoForId(
         @Path("id") id: Int
-    ) : Response<ExerciseInfoDto>
+    ): Response<ExerciseInfoDto>
 
     @GET("exercisebaseinfo/")
     suspend fun getBaseExercises(
         @Query("language") language: Int,
         @Query("limit") limit: Int = 500
-    ) : Response<ExerciseApiResponse<BaseExerciseDto>>
+    ): Response<ExerciseApiResponse<BaseExerciseDto>>
 }
