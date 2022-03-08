@@ -5,7 +5,7 @@ import com.monarc.musclemate.data.entities.WorkoutRoutine
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface WorkoutPlanDao {
+interface WorkoutRoutineDao {
 
     @Query("SELECT * FROM workout_routine WHERE id = :id")
     suspend fun getWorkoutPlanById(id: Int): WorkoutRoutine

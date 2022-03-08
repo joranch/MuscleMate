@@ -1,7 +1,6 @@
 package com.monarc.musclemate.data.remote.dto
 
-import com.monarc.musclemate.data.enums.ApiExerciseCategory
-import com.monarc.musclemate.data.enums.EquipmentType
+import com.monarc.musclemate.data.entities.Exercise
 import com.monarc.musclemate.domain.models.Muscle
 
 class BaseExerciseDto(
@@ -14,7 +13,7 @@ class BaseExerciseDto(
     val muscles_secondary: List<Muscle>  = emptyList(),
     val equipment: List<EquipmentDto>  = emptyList(),
     val images: List<ImageDto> = emptyList(),
-    val exercises: List<ExerciseDto> = emptyList(),
+    val exercises: List<Exercise> = emptyList(),
 //    val variations: List<Int?>  = emptyList(),
 ) {
 }

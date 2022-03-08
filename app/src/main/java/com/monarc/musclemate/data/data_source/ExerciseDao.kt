@@ -2,6 +2,7 @@ package com.monarc.musclemate.data.data_source
 
 import androidx.room.*
 import com.monarc.musclemate.data.entities.Exercise
+import com.monarc.musclemate.data.entities.relations.ExerciseWithConfigurations
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -13,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val workoutRoutineRepository: WorkoutRoutineRepository
+    private val workoutRoutineRepository: WorkoutRoutineRepository,
+
 ) : BaseViewModel() {
 
     private val _workoutRoutines = MutableStateFlow(emptyList<WorkoutRoutine>()) //workoutRoutineRepository.getWorkoutPlans().asLiveData()
@@ -24,18 +25,6 @@ class HomeViewModel @Inject constructor(
             workoutRoutineRepository.getWorkoutPlans().collect { items ->
                 _workoutRoutines.value = items
             }
-        }
-    }
-
-    fun addNewWorkoutPlan() {
-        viewModelScope.launch {
-            workoutRoutineRepository.insertWorkoutPlan(
-                WorkoutRoutine(
-                    title = "Upper body",
-                    description = "Upper body day",
-                    lastWorkoutDate = null
-                )
-            )
         }
     }
 

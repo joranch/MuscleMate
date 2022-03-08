@@ -1,8 +1,8 @@
 package com.monarc.musclemate.data.remote
 
+import com.monarc.musclemate.data.entities.Exercise
 import com.monarc.musclemate.data.enums.ApiConstants
 import com.monarc.musclemate.data.remote.dto.BaseExerciseDto
-import com.monarc.musclemate.data.remote.dto.ExerciseDto
 import com.monarc.musclemate.data.remote.dto.ExerciseInfoDto
 import com.monarc.musclemate.data.remote.responses.ExerciseApiResponse
 import com.squareup.moshi.Moshi
@@ -30,7 +30,7 @@ interface ExerciseApi {
     suspend fun getExercises(
         @Query("language") language: Int,
         @Query("limit") limit: Int = 500
-    ): Response<ExerciseApiResponse<ExerciseDto>>
+    ): Response<ExerciseApiResponse<Exercise>>
 
     @GET("exerciseinfo/{id}")
     suspend fun getExerciseInfoForId(

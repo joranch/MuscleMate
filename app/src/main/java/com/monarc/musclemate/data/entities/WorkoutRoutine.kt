@@ -10,13 +10,13 @@ data class WorkoutRoutine(
     val id: Int = 0,
 
     @ColumnInfo(name = "title")
-    val title: String,
+    var title: String,
 
     @ColumnInfo(name = "description")
-    val description: String?,
+    var description: String?,
 
     @ColumnInfo(name = "last_workout_date")
-    val lastWorkoutDate: String?
+    var lastWorkoutDate: String?
 
 ) {
 

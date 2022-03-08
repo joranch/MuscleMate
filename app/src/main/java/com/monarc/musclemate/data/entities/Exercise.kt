@@ -14,21 +14,18 @@ data class Exercise(
     val name: String,
     @ColumnInfo(name = "api_id")
     val apiId: String?,
-
+    @ColumnInfo(name = "exercise_base")
     val exerciseBase: Int?,
+    @ColumnInfo(name = "description")
     val description: String,
+    @ColumnInfo(name = "category")
     val category: Int?,
+    @ColumnInfo(name = "target_muscle")
+    val muscles: List<Int> = emptyList(),
+    @ColumnInfo(name = "target_muscle_secondary")
+    val musclesSecondary: List<Int>  = emptyList(),
+    @ColumnInfo(name = "equipment")
+    val equipment: List<Int>  = emptyList(),
+    @ColumnInfo(name = "variations")
+    val variations: List<Int>  = emptyList()
 )
-//
-//data class ExerciseDto(
-//    val id: Int,
-//    val uuid: String,
-//    val name: String,
-//    val exerciseBase: Int?,
-//    val description: String,
-//    val category: Int?,
-//    val muscles: List<Int> = emptyList(),
-//    val musclesSecondary: List<Int>  = emptyList(),
-//    val equipment: List<Int>  = emptyList(),
-//    val variations: List<Int>  = emptyList()
-//)

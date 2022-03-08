@@ -17,8 +17,6 @@ data class ExerciseConfiguration(
     val workoutPlanId: Int,
     @ColumnInfo(name = "exercise_id")
     val exerciseId: Int,
-    @ColumnInfo(name = "number_of_sets")
-    val numOfSets: Int = 3,
     @ColumnInfo(name = "number_of_reps")
     val numOfReps: Int = 8,
     @ColumnInfo(name = "auto_add_weight")

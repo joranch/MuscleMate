@@ -1,10 +1,10 @@
 package com.monarc.musclemate.data.repositories
 
 import com.monarc.musclemate.data.Resource
+import com.monarc.musclemate.data.entities.Exercise
 import com.monarc.musclemate.data.enums.ApiConstants
 import com.monarc.musclemate.data.remote.ExerciseApi
 import com.monarc.musclemate.data.remote.dto.BaseExerciseDto
-import com.monarc.musclemate.data.remote.dto.ExerciseDto
 import com.monarc.musclemate.data.remote.dto.ExerciseInfoDto
 import com.monarc.musclemate.data.remote.responses.ExerciseApiResponse
 import com.monarc.musclemate.domain.repositories.ExerciseApiRepository
@@ -14,7 +14,7 @@ class ExerciseApiRepositoryImpl @Inject constructor(
     private val exerciseApi: ExerciseApi
 ) : ExerciseApiRepository {
 
-    override suspend fun getExercises(): Resource<ExerciseApiResponse<ExerciseDto>> {
+    override suspend fun getExercises(): Resource<ExerciseApiResponse<Exercise>> {
         return try {
             val response = exerciseApi.getExercises(ApiConstants.API_LANGUAGE_EN)
 
