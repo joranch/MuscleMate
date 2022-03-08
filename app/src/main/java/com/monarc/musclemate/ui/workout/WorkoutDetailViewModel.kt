@@ -34,11 +34,11 @@ class WorkoutDetailViewModel @Inject constructor(
         if (workoutId == WorkoutRoutine.NEW_WORKOUT_ROUTINE_ID)
             return
 
-        getWorkoutRoutine()
+        loadWorkoutRoutine()
         getExercises()
     }
 
-    fun getWorkoutRoutine() {
+    fun loadWorkoutRoutine() {
         viewModelScope.launch {
             if(workoutId != null && workoutId != WorkoutRoutine.NEW_WORKOUT_ROUTINE_ID) {
                 _workoutRoutine.value = workoutRoutineRepository.getWorkoutPlanById(workoutId)
@@ -76,6 +76,16 @@ class WorkoutDetailViewModel @Inject constructor(
                     workoutRoutineRepository.updateWorkoutPlan(workoutRoutine.value)
                 }
             }
+        }
+    }
+
+    fun deleteWorkoutRoutine() {
+        if(workoutId == WorkoutRoutine.NEW_WORKOUT_ROUTINE_ID)
+            return
+
+        viewModelScope.launch {
+            workoutRoutineRepository.deleteWorkoutRoutine(workoutRoutine.value)
+            // TODO delete exercises, config, etc
         }
     }
 

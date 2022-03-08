@@ -1,11 +1,14 @@
 package com.monarc.musclemate.ui.workout
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.monarc.musclemate.R
 import com.monarc.musclemate.databinding.WorkoutDetailFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,22 +60,33 @@ class WorkoutDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_save_button -> {
-                viewModel.saveWorkoutRoutine()
-                findNavController().popBackStack()
+                saveWorkoutRoutine()
             }
             R.id.menu_delete_button -> {
-                ShowDeleteConfirmationDialog()
+                showDeleteConfirmationDialog()
             }
         }
         return true
     }
 
-    private fun ShowDeleteConfirmationDialog() {
-
+    private fun showDeleteConfirmationDialog() {
+        val builder = MaterialAlertDialogBuilder(requireContext())
+        builder.setTitle("Confirm")
+        builder.setMessage("Are you sure you want to delete workout routine")
+        builder.setPositiveButton("Delete") { dialog, i ->
+            viewModel.deleteWorkoutRoutine()
+            dialog.dismiss()
+            findNavController().popBackStack()
+        }
+        builder.setNegativeButton("Cancel") { dialog, i ->
+            dialog.dismiss()
+        }
+        builder.show()
     }
 
     private fun saveWorkoutRoutine() {
-
+        viewModel.saveWorkoutRoutine()
+        findNavController().popBackStack()
     }
 
     override fun onDestroy() {

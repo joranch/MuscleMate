@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
 
     fun deleteWorkoutPlan(workoutRoutine: WorkoutRoutine) {
         viewModelScope.launch {
-            workoutRoutineRepository.deleteWorkoutPlan(workoutRoutine)
+            workoutRoutineRepository.deleteWorkoutRoutine(workoutRoutine)
         }
     }
 

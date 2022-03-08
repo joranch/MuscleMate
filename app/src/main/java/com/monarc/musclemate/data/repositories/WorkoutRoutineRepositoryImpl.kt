@@ -30,7 +30,7 @@ class WorkoutRoutineRepositoryImpl @Inject constructor(database: MuscleMateDatab
         workoutDao.insert(workoutRoutine)
     }
 
-    override suspend fun deleteWorkoutPlan(workoutRoutine: WorkoutRoutine) {
+    override suspend fun deleteWorkoutRoutine(workoutRoutine: WorkoutRoutine) {
         workoutDao.delete(workoutRoutine)
         // TODO - Clean up other tables
     }

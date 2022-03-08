@@ -10,6 +10,6 @@ interface WorkoutRoutineRepository {
     fun getExercisesForWorkoutRoutine(workoutRoutineId: Int): Flow<List<WorkoutRoutineExerciseWithExercise>>
     suspend fun getWorkoutPlanById(id: Int) : WorkoutRoutine
     suspend fun insertWorkoutPlan(workoutRoutine: WorkoutRoutine)
-    suspend fun deleteWorkoutPlan(workoutRoutine: WorkoutRoutine)
+    suspend fun deleteWorkoutRoutine(workoutRoutine: WorkoutRoutine)
     suspend fun updateWorkoutPlan(workoutRoutine: WorkoutRoutine)
 }
