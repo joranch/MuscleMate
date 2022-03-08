@@ -56,12 +56,19 @@ class WorkoutDetailFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.save_button -> {
+            R.id.menu_save_button -> {
                 viewModel.saveWorkoutRoutine()
                 findNavController().popBackStack()
             }
+            R.id.menu_delete_button -> {
+                ShowDeleteConfirmationDialog()
+            }
         }
         return true
+    }
+
+    private fun ShowDeleteConfirmationDialog() {
+
     }
 
     private fun saveWorkoutRoutine() {

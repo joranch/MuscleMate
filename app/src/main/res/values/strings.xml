@@ -19,4 +19,6 @@
     <string name="set_image_for_workout">Set image for workout</string>
     <string name="exercises">Exercises</string>
     <string name="add_exercise">Add exercise</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
 </resources>
