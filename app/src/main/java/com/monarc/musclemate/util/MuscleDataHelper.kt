@@ -1,13 +1,13 @@
-package com.monarc.musclemate.data.data_source
+package com.monarc.musclemate.util
 
 import com.monarc.musclemate.domain.models.Muscle
 
-object MuscleDataSource {
+object MuscleDataHelper {
 
     fun getMuscle(id: Int): Muscle? {
         return if (id > muscles.size || id < 1) {
             null
-        } else muscles[id]
+        } else muscles[id-1]
     }
 
     fun getAllMuscles() = muscles

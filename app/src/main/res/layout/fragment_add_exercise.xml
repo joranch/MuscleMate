@@ -5,6 +5,7 @@
     tools:context=".ui.add_exercise.AddExerciseFragment">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.monarc.musclemate.ui.add_exercise.AddExerciseViewModel" />
@@ -23,7 +24,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/search_text_layout"
                 android:layout_width="0dp"
@@ -31,12 +31,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
+                android:foregroundTint="?attr/colorOnPrimary"
                 app:boxBackgroundColor="?attr/colorOnPrimary"
                 app:endIconDrawable="@drawable/ic_add"
+                app:helperTextTextColor="?attr/colorOnPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:foregroundTint="?attr/colorOnPrimary">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -44,65 +45,75 @@
                     android:hint="@string/enter_search_text" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/category_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
+                android:foregroundTint="?attr/colorOnPrimarySurface"
+                app:cardBackgroundColor="?attr/colorPrimarySurface"
+                app:cardCornerRadius="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_text_layout"
-                app:singleSelection="false">
+                app:layout_constraintTop_toBottomOf="@id/search_text_layout">
 
-                <com.google.android.material.chip.Chip
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorSecondary"
-                    android:checkable="true"
-                    android:text="Chest" />
+                    android:text="Filter category"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                    android:textColor="?attr/colorOnPrimary" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_category"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorSecondary"
-                    android:text="Chest" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    app:singleSelection="false" />
+            </androidx.cardview.widget.CardView>
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorSecondary"
-                    android:text="Chest" />
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/muscle_card"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:foregroundTint="?attr/colorOnPrimarySurface"-->
+<!--                app:cardBackgroundColor="?attr/colorPrimarySurface"-->
+<!--                app:cardCornerRadius="5dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/category_card">-->
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorSecondary"
-                    android:text="Chest" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Filter muscle"-->
+<!--                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"-->
+<!--                    android:textColor="?attr/colorOnPrimary" />-->
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorSecondary"
-                    android:text="Chest" />
+<!--                <com.google.android.material.chip.ChipGroup-->
+<!--                    android:id="@+id/chip_group"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="32dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:singleLine="true"-->
+<!--                    app:singleSelection="false" />-->
+<!--            </androidx.cardview.widget.CardView>-->
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorSecondary"
-                    android:text="Chest" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorSecondary"
-                    android:text="Chest" />
-
-            </com.google.android.material.chip.ChipGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.cardview.widget.CardView
@@ -119,7 +130,7 @@
                 android:id="@+id/workout_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="true"/>
+                android:clipToPadding="true" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
