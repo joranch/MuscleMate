@@ -21,4 +21,5 @@
     <string name="add_exercise">Add exercise</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
+    <string name="enter_search_text">Enter search text</string>
 </resources>

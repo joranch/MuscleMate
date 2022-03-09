@@ -1,9 +1,7 @@
 package com.monarc.musclemate.ui.workout
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,7 +40,7 @@ class WorkoutDetailFragment : Fragment() {
         viewModel.loadWorkoutRoutineData()
 
         binding.addExerciseButton.setOnClickListener {
-            viewModel.getExercises()
+            findNavController().navigate(WorkoutDetailFragmentDirections.actionWorkoutDetailFragmentToAddExerciseFragment())
         }
 
 //        lifecycleScope.launchWhenStarted {
