@@ -8,11 +8,14 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
-import com.monarc.musclemate.data.enums.ApiExerciseCategory
+import com.monarc.musclemate.data.entities.Exercise
 import com.monarc.musclemate.databinding.FragmentAddExerciseBinding
-import com.monarc.musclemate.domain.models.Muscle
+import com.monarc.musclemate.ui.add_exercise.adapters.ExerciseListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class AddExerciseFragment : Fragment() {
@@ -20,6 +23,8 @@ class AddExerciseFragment : Fragment() {
     private val viewModel: AddExerciseViewModel by viewModels()
     private var _binding: FragmentAddExerciseBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var exerciseListAdapter: ExerciseListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +42,31 @@ class AddExerciseFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 
+        exerciseListAdapter = ExerciseListAdapter(
+            onItemClicked = { exercise -> onExerciseClicked(exercise) },
+            onInfoClicked = { exercise ->
+                viewModel.showToastMessage("Info click for ${exercise.name}")
+            })
+
+        binding.workoutRecyclerView.adapter = exerciseListAdapter
+        binding.workoutRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         addChips()
+        subscribeToObservables()
+        viewModel.fetchExercisesFromApi()
+    }
+
+    private fun subscribeToObservables() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.exercises.collectLatest {
+                it.let {
+                    exerciseListAdapter.submitList(it.toList())
+                }
+            }
+        }
+    }
+
+    private fun onExerciseClicked(exercise: Exercise) {
+        viewModel.showToastMessage("Item click for ${exercise.name}")
     }
 
     private fun addChips() {
@@ -52,7 +81,7 @@ class AddExerciseFragment : Fragment() {
         }
     }
 
-    private fun createChip(labelText: String) : View {
+    private fun createChip(labelText: String): View {
         val chip = Chip(requireContext())
         return chip.apply {
             id = ViewCompat.generateViewId()

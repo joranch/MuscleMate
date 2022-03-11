@@ -2,7 +2,7 @@ package com.monarc.musclemate.util
 
 import com.monarc.musclemate.domain.models.Muscle
 
-object MuscleDataHelper {
+class MuscleDataHelper {
 
     fun getMuscle(id: Int): Muscle? {
         return if (id > muscles.size || id < 1) {

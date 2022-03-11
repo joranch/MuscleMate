@@ -3,7 +3,7 @@ package com.monarc.musclemate.ui.add_exercise
 import androidx.lifecycle.viewModelScope
 import com.monarc.musclemate.data.Resource
 import com.monarc.musclemate.data.entities.Exercise
-import com.monarc.musclemate.data.enums.ApiExerciseCategory
+import com.monarc.musclemate.data.enums.ExerciseCategory
 import com.monarc.musclemate.domain.repositories.ExerciseApiRepository
 import com.monarc.musclemate.ui.BaseViewModel
 import com.monarc.musclemate.util.MuscleDataHelper
@@ -18,8 +18,8 @@ class AddExerciseViewModel @Inject constructor(
     private val exerciseApiRepository: ExerciseApiRepository
 ) : BaseViewModel() {
 
-    val muscleList = MuscleDataHelper.getAllMuscles()
-    val exerciseCategoryList = ApiExerciseCategory.values()
+    val muscleList = MuscleDataHelper().getAllMuscles()
+    val exerciseCategoryList = ExerciseCategory.values()
 
     private var _exercises = MutableStateFlow(emptyList<Exercise>())
     val exercises = _exercises.asStateFlow()

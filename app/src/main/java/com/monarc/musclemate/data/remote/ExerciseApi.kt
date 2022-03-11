@@ -29,7 +29,7 @@ interface ExerciseApi {
     @GET("exercise/")
     suspend fun getExercises(
         @Query("language") language: Int,
-        @Query("limit") limit: Int = 500
+        @Query("limit") limit: Int = 20
     ): Response<ExerciseApiResponse<Exercise>>
 
     @GET("exerciseinfo/{id}")

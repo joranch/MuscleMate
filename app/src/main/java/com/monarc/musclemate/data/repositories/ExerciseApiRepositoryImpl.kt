@@ -1,5 +1,6 @@
 package com.monarc.musclemate.data.repositories
 
+import android.util.Log
 import com.monarc.musclemate.data.Resource
 import com.monarc.musclemate.data.entities.Exercise
 import com.monarc.musclemate.data.enums.ApiConstants
@@ -25,6 +26,7 @@ class ExerciseApiRepositoryImpl @Inject constructor(
                 Resource.Error(response.message(), result)
             }
         } catch (e: Exception) {
+            Log.e("ExerciseApiRepository",e.localizedMessage.toString())
             Resource.Error(e.localizedMessage ?: "An error occurred")
         }
     }
