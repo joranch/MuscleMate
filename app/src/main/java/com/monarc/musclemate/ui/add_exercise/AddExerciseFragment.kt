@@ -1,10 +1,12 @@
 package com.monarc.musclemate.ui.add_exercise
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -42,11 +44,11 @@ class AddExerciseFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 
-        exerciseListAdapter = ExerciseListAdapter(
-            onItemClicked = { exercise -> onExerciseClicked(exercise) },
-            onInfoClicked = { exercise ->
-                viewModel.showToastMessage("Info click for ${exercise.name}")
-            })
+        exerciseListAdapter =
+            ExerciseListAdapter(
+                onItemClicked = { exercise -> onExerciseClicked(exercise) },
+                exerciseInfoClicked = { exercise -> onExerciseInfoClicked(exercise)}
+            )
 
         binding.workoutRecyclerView.adapter = exerciseListAdapter
         binding.workoutRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -63,10 +65,20 @@ class AddExerciseFragment : Fragment() {
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.showToast.collectLatest {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onExerciseClicked(exercise: Exercise) {
         viewModel.showToastMessage("Item click for ${exercise.name}")
+    }
+
+    private fun onExerciseInfoClicked(exercise: Exercise) {
+        viewModel.showToastMessage("Info click for ${exercise.name}")
     }
 
     private fun addChips() {

@@ -1,5 +1,6 @@
 package com.monarc.musclemate.ui.add_exercise.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +12,7 @@ import com.monarc.musclemate.util.ExerciseCategoryHelper
 
 class ExerciseListAdapter(
     private val onItemClicked: (Exercise) -> Unit,
-    private val onInfoClicked: (Exercise) -> Unit
+    private val exerciseInfoClicked: (Exercise) -> Unit
 ) :
     ListAdapter<Exercise, ExerciseListAdapter.ExerciseViewHolder>(DiffCallback) {
 
@@ -26,18 +27,32 @@ class ExerciseListAdapter(
     }
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
-        holder.bind(getItem(position), onInfoClicked)
-        holder.itemView.setOnClickListener { onItemClicked }
+        val item = getItem(position)
+        holder.bind(item) {
+            exerciseInfoClicked(it)
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClicked(item)
+        }
+
+//        holder.itemView.setOnLongClickListener { view ->
+//            onInfoClicked(getItem(position))
+//
+//            return@setOnLongClickListener true
+//        }
     }
 
 
     class ExerciseViewHolder(private var binding: ItemExerciseListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(exercise: Exercise, onInfoClicked: (Exercise) -> Unit) {
+        fun bind(exercise: Exercise, exerciseInfoClicked: (Exercise) -> Unit) {
             binding.categoryText.text =
                 exerciseCategoryHelper.getCategoryById(exercise.category ?: 0).name
-            binding.exerciseNameText
-            binding.seeInfoButton.setOnClickListener { onInfoClicked }
+            binding.exerciseNameText.text = exercise.name
+            binding.seeInfoButton.setOnClickListener {
+                exerciseInfoClicked(exercise)
+            }
         }
     }
 
