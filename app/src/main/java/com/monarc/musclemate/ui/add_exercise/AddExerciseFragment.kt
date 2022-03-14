@@ -87,9 +87,8 @@ class AddExerciseFragment : Fragment() {
 //            chipGroup.addView(createChip(muscle.name))
 //        }
 
-        val chipGroupCategory = binding.chipGroupCategory
         viewModel.exerciseCategoryList.forEach { category ->
-            chipGroupCategory.addView(createChip(category.name))
+            binding.chipGroupCategory.addView(createChip(category.name))
         }
     }
 

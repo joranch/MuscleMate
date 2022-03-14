@@ -9,12 +9,15 @@ import com.monarc.musclemate.data.repositories.ExerciseApiRepositoryImpl
 import com.monarc.musclemate.data.repositories.WorkoutRoutineRepositoryImpl
 import com.monarc.musclemate.domain.repositories.ExerciseApiRepository
 import com.monarc.musclemate.domain.repositories.WorkoutRoutineRepository
+import com.monarc.musclemate.util.DispatcherProvider
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -55,6 +58,18 @@ object AppModule {
     @Provides
     fun provideWorkoutRepository(db: MuscleMateDatabase): WorkoutRoutineRepository = WorkoutRoutineRepositoryImpl(db)
 
+    @Singleton
+    @Provides
+    fun provideDispatchers(): DispatcherProvider = object : DispatcherProvider {
+        override val main: CoroutineDispatcher
+            get() = Dispatchers.Main
+        override val io: CoroutineDispatcher
+            get() = Dispatchers.IO
+        override val default: CoroutineDispatcher
+            get() = Dispatchers.Default
+        override val unconfined: CoroutineDispatcher
+            get() = Dispatchers.Unconfined
+    }
 //    @Module
 //    @InstallIn(SingletonComponent::class)
 //    internal abstract class DependenciesBindings {
