@@ -9,11 +9,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.monarc.musclemate.data.entities.WorkoutRoutine
 import com.monarc.musclemate.databinding.FragmentHomeBinding
 import com.monarc.musclemate.ui.home.adapters.WorkoutListAdapter
+import com.monarc.musclemate.workers.DownloadExercisesWorker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -51,6 +57,8 @@ class HomeFragment : Fragment() {
         binding.fab.setOnClickListener{
             findNavController().navigate(HomeFragmentDirections.actionNavHomeToWorkoutDetailFragment(WorkoutRoutine.NEW_WORKOUT_ROUTINE_ID))
         }
+
+        createFetchExercisesWorker()
     }
 
     private fun subscribeToObservables() {
@@ -64,8 +72,21 @@ class HomeFragment : Fragment() {
     }
 
     private fun onWorkoutPlanItemClick(workoutRoutine: WorkoutRoutine) {
-//        homeViewModel.deleteWorkoutPlan(workoutRoutine)
         findNavController().navigate(HomeFragmentDirections.actionNavHomeToWorkoutDetailFragment(workoutRoutine.id))
+    }
+
+    private fun createFetchExercisesWorker() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.UNMETERED)
+            .setRequiresCharging(true)
+            .build()
+
+        val periodicWorkRequest =
+            PeriodicWorkRequestBuilder<DownloadExercisesWorker>(7, TimeUnit.DAYS)
+                .setConstraints(constraints).addTag(DownloadExercisesWorker.REQUEST_TAG)
+                .build()
+
+        WorkManager.getInstance(requireContext()).enqueue(periodicWorkRequest)
     }
 
     override fun onDestroyView() {

@@ -6,8 +6,10 @@ import com.monarc.musclemate.data.data_source.MuscleMateDatabase
 import com.monarc.musclemate.data.enums.ApiConstants
 import com.monarc.musclemate.data.remote.ExerciseApi
 import com.monarc.musclemate.data.repositories.ExerciseApiRepositoryImpl
+import com.monarc.musclemate.data.repositories.ExerciseRepositoryImpl
 import com.monarc.musclemate.data.repositories.WorkoutRoutineRepositoryImpl
 import com.monarc.musclemate.domain.repositories.ExerciseApiRepository
+import com.monarc.musclemate.domain.repositories.ExerciseRepository
 import com.monarc.musclemate.domain.repositories.WorkoutRoutineRepository
 import com.monarc.musclemate.util.DispatcherProvider
 import com.squareup.moshi.Moshi
@@ -50,13 +52,23 @@ object AppModule {
         .build()
         .create(ExerciseApi::class.java)
 
-    @Singleton
-    @Provides
-    fun provideExerciseApiRepository(api: ExerciseApi): ExerciseApiRepository = ExerciseApiRepositoryImpl(api)
 
     @Singleton
     @Provides
-    fun provideWorkoutRepository(db: MuscleMateDatabase): WorkoutRoutineRepository = WorkoutRoutineRepositoryImpl(db)
+    fun provideWorkoutRepository(db: MuscleMateDatabase): WorkoutRoutineRepository =
+        WorkoutRoutineRepositoryImpl(db)
+
+    @Singleton
+    @Provides
+    fun provideExerciseRepository(db: MuscleMateDatabase): ExerciseRepository =
+        ExerciseRepositoryImpl(db)
+
+    @Singleton
+    @Provides
+    fun provideExerciseApiRepository(
+        api: ExerciseApi,
+        exerciseRepository: ExerciseRepository
+    ): ExerciseApiRepository = ExerciseApiRepositoryImpl(api, exerciseRepository)
 
     @Singleton
     @Provides

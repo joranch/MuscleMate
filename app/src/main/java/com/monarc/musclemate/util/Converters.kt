@@ -9,7 +9,12 @@ class Converters {
 class IntListConverter {
     @TypeConverter
     fun fromString(listString: String): List<Int> {
-        return listString.split(",").map { it.toInt() }
+        if(listString.length <= 2)
+            return emptyList()
+
+        return listString.split(",").map { value ->
+            value.toInt()
+        }
     }
 
     @TypeConverter

@@ -76,7 +76,9 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal"
-                    app:singleSelection="false" />
+                    app:chipSpacingHorizontal="4dp"
+                    app:chipSpacingVertical="4dp"
+                    app:singleSelection="true" />
             </androidx.cardview.widget.CardView>
 
 <!--            <androidx.cardview.widget.CardView-->
