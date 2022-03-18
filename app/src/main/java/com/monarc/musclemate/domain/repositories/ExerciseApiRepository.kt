@@ -10,7 +10,7 @@ import com.monarc.musclemate.data.remote.responses.ExerciseApiResponse
 interface ExerciseApiRepository {
 
     suspend fun getExercises() : Resource<ExerciseApiResponse<ExerciseDto>> // TODO: Refactor to flow
-    suspend fun downloadExercises()
+    suspend fun downloadExercises(): Boolean
     suspend fun getBaseExercises() : Resource<ExerciseApiResponse<BaseExerciseDto>>
     suspend fun getExerciseInfoById(id: Int) : Resource<ExerciseInfoDto>
 }

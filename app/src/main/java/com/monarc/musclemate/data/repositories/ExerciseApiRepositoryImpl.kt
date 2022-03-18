@@ -35,7 +35,7 @@ class ExerciseApiRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun downloadExercises() {
+    override suspend fun downloadExercises() : Boolean {
         when (val result = getExercises()) {
             is Resource.Success -> {
                 result.data?.let {
@@ -54,13 +54,16 @@ class ExerciseApiRepositoryImpl @Inject constructor(
                         )
                     }
                     exerciseRepository.insertAll(exercises)
+                    return true
                 }
             }
             is Resource.Error -> {
                 Log.e("DownloadExercisesWorker", result.message.toString())
+                return false
             }
-            else -> {}
+            else -> return false
         }
+        return false
     }
 
 

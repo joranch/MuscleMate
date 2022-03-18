@@ -16,7 +16,6 @@ import java.lang.Exception
 @HiltWorker
 class DownloadExercisesWorker @AssistedInject constructor(
     private val exerciseApiRepository: ExerciseApiRepository,
-    private val exerciseRepository: ExerciseRepository,
     @Assisted ctx: Context,
     @Assisted params: WorkerParameters
 ) : CoroutineWorker(ctx, params) {
@@ -27,40 +26,14 @@ class DownloadExercisesWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         Log.i("DownloadExercisesWorker", "Running download exercise worker")
-
         return try {
-            when (val result = exerciseApiRepository.getExercises()) {
-                is Resource.Success -> {
-                    result.data?.let {
-                        val exercises = it.results.map { item ->
-                            Exercise(
-                                0,
-                                item.name,
-                                item.id,
-                                item.exerciseBase,
-                                item.description,
-                                item.category,
-                                item.muscles,
-                                item.musclesSecondary,
-                                item.equipment,
-                                item.variations
-                            )
-                        }
-                        exerciseRepository.insertAll(exercises)
-
-                        return Result.success()
-                    }
-                }
-                is Resource.Error -> {
-                    Log.e("DownloadExercisesWorker", result.message.toString())
-                    return Result.failure()
-                }
-                else ->  Result.failure()
+            if (exerciseApiRepository.downloadExercises()) {
+                return Result.success()
             }
-            return Result.retry()
+            Result.failure()
         } catch (e: Exception) {
             Log.e("DownloadExercisesWorker", e.localizedMessage)
-            return Result.failure()
+            Result.failure()
         }
     }
 }
