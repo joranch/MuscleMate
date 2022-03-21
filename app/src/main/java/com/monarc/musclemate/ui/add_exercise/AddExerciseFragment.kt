@@ -92,18 +92,22 @@ class AddExerciseFragment : Fragment() {
                     exerciseListAdapter.submitList(it.toList())
                 }
             }
+        }
 
+        lifecycleScope.launchWhenStarted {
             viewModel.apiEvent.collectLatest { event ->
                 when (event) {
                     is AddExerciseViewModel.ApiEvent.Empty -> {
-                        viewModel.showToastMessage("Download exercises complete")
+                        // TODO: stop loading
                     }
                     is AddExerciseViewModel.ApiEvent.Loading -> {
-                        viewModel.showToastMessage("Loading exercises")
+                        // TODO: show loading
                     }
                 }
             }
+        }
 
+        lifecycleScope.launchWhenStarted {
             viewModel.showToast.collectLatest {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             }
