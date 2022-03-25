@@ -56,6 +56,16 @@ class AddExerciseFragment : Fragment() {
                 exerciseInfoClicked = { exercise -> onExerciseInfoClicked(exercise) }
             )
 
+        binding.chipGroupCategory.setOnCheckedChangeListener { group, checkedId ->
+            if(checkedId == -1) {
+                viewModel.setSelectedExerciseCategory(null)
+                return@setOnCheckedChangeListener
+            }
+
+            val selectedCategory = viewModel.exerciseCategoryList[checkedId-1]
+            viewModel.setSelectedExerciseCategory(selectedCategory)
+        }
+
         binding.workoutRecyclerView.adapter = exerciseListAdapter
         binding.workoutRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         addChips()

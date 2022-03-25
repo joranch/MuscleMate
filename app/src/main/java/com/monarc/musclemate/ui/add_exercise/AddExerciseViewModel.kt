@@ -10,6 +10,7 @@ import com.monarc.musclemate.MuscleMateApplication
 import com.monarc.musclemate.data.Resource
 import com.monarc.musclemate.data.entities.Exercise
 import com.monarc.musclemate.data.enums.ExerciseCategory
+import com.monarc.musclemate.domain.models.Muscle
 import com.monarc.musclemate.domain.repositories.ExerciseApiRepository
 import com.monarc.musclemate.domain.repositories.ExerciseRepository
 import com.monarc.musclemate.ui.BaseViewModel
@@ -18,10 +19,7 @@ import com.monarc.musclemate.util.MuscleDataHelper
 import com.monarc.musclemate.workers.DownloadExercisesWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,6 +40,7 @@ class AddExerciseViewModel @Inject constructor(
 
     internal var workerInfo: LiveData<MutableList<WorkInfo>>
     private val workManager = WorkManager.getInstance(application)
+    private var allExercises = listOf<Exercise>()
 
     private val _apiEvent = MutableStateFlow<ApiEvent>(ApiEvent.Empty)
     val apiEvent: StateFlow<ApiEvent> = _apiEvent
@@ -52,16 +51,49 @@ class AddExerciseViewModel @Inject constructor(
     private var _exercises = MutableStateFlow(emptyList<Exercise>())
     val exercises = _exercises
 
+    private var _searchText = MutableStateFlow("")
+    val searchText get() = _searchText
+
+    private var selectedExerciseCategory = ExerciseCategory.None
+    private var selectedTargetMuscle: Muscle? = null
+
 
     init {
         viewModelScope.launch {
             exerciseRepository.getAlExercises().collect { items ->
+                allExercises = items
                 _exercises.value = items
             }
         }
-
         workerInfo = workManager.getWorkInfosByTagLiveData(DownloadExercisesWorker.REQUEST_TAG)
-//        fetchExercisesFromApi()
+    }
+
+    fun filterOnSearchText(query: String) {
+
+    }
+
+    fun setSelectedExerciseCategory(category: ExerciseCategory?) {
+        if(category == null) {
+            selectedExerciseCategory = ExerciseCategory.None
+            return
+        }
+        selectedExerciseCategory = category
+        filterExercises()
+    }
+
+    private fun filterExercises() {
+        var filteredList = allExercises
+
+        // Filter category
+        if(selectedExerciseCategory != ExerciseCategory.None) {
+            filteredList = filteredList.filter { exercise -> exercise.category == selectedExerciseCategory.id  }
+        }
+
+        selectedTargetMuscle?.let {
+            filteredList = filteredList.filter { exercise -> exercise.muscles?.contains(it.id) }
+        }
+
+        _exercises.value = filteredList
     }
 
     suspend fun checkHasExercises() : Boolean {
