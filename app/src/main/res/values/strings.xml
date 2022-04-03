@@ -22,4 +22,9 @@
     <string name="delete">Delete</string>
     <string name="save">Save</string>
     <string name="enter_search_text">Enter search text</string>
+    <string name="category">Category:</string>
+    <string name="muscles">Muscles:</string>
+    <string name="equipment">Equipment:</string>
+    <string name="variations">Variations:</string>
+    <string name="image_showing_the_exercise">Image showing the exercise</string>
 </resources>
